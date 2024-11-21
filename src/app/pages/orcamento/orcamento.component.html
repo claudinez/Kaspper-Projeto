@@ -32,17 +32,21 @@
     </div>
   
     <!-- Linha 2: E-mail -->
-    <div class="form-row">
+    <div>
       <label for="email">
         E-mail *:
-        <input id="email" formControlName="email" type="email" maxlength="100" required />
+        <input
+          id="email"
+          formControlName="email"
+          type="email"
+          maxlength="100"
+          required
+          (input)="clienteForm.get('email')?.updateValueAndValidity()"
+        />
       </label>
       <div *ngIf="clienteForm.get('email')?.invalid && clienteForm.get('email')?.touched" class="error-message">
-        <small class="text-danger" *ngIf="clienteForm.get('email')?.hasError('required')">
-          O e-mail é obrigatório.
-        </small>
-        <small class="text-danger" *ngIf="clienteForm.get('email')?.hasError('email')">
-          Por favor, insira um e-mail válido.
+        <small class="text-danger" *ngIf="clienteForm.get('email')?.hasError('emailInvalido')">
+          O formato do e-mail está incorreto. Certifique-se de incluir '@' e um domínio válido.
         </small>
       </div>
     </div>

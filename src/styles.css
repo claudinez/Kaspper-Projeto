@@ -8,9 +8,35 @@ body {
   
   /* Melhorar títulos (usando classes do Bootstrap como .h1, .h2, etc.) */
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Georgia', serif; /* Fonte serifada para títulos */
+    font-family: 'Roboto', sans-serif;
     font-weight: bold;
-    color: #0056b3; /* Cor para os títulos */
+    color: #333;
+    line-height: 1.2;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  h1 {
+    font-size: 3rem;
+    color: #1a73e8;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    font-size: 2rem;
+    color: #555;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  }
+  
+  h3 {
+    font-size: 2rem;
+    color: #777;
+  }
+  
+  h1:hover, h2:hover, h3:hover {
+    color: #e91e63;
+    text-decoration: underline;
   }
   
   /* Ajuste de links */
