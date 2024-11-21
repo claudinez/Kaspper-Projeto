@@ -1,0 +1,119 @@
+<div class="orcamento-container">
+  <h2>Cadastro de Cliente e Projeto</h2>
+
+  <!-- Mensagem de Sucesso ou Erro -->
+  <div
+    *ngIf="mensagem"
+    class="alert"
+    [ngClass]="{
+      'alert-success': mensagemTipo === 'success',
+      'alert-danger': mensagemTipo === 'error'
+    }"
+  >
+    {{ mensagem }}
+  </div>
+
+  <!-- Formulário de Cadastro de Cliente -->
+  <form (ngSubmit)="adicionarCliente()" [formGroup]="clienteForm">
+    <h3>Dados do Cliente</h3>
+  
+    <!-- Linha 1: Nome e Sobrenome -->
+    <div class="form-row">
+      <label>
+        Nome *:
+        <input formControlName="nome" type="text" maxlength="50" required />
+      </label>
+      <label>
+        Sobrenome *:
+        <input formControlName="sobrenome" type="text" maxlength="50" required />
+      </label>
+    </div>
+  
+    <!-- Linha 2: E-mail -->
+    <div class="form-row">
+      <label for="email">
+        E-mail *:
+        <input id="email" formControlName="email" type="email" maxlength="100" required />
+      </label>
+      <div *ngIf="clienteForm.get('email')?.invalid && clienteForm.get('email')?.touched" class="error-message">
+        <small class="text-danger" *ngIf="clienteForm.get('email')?.hasError('required')">
+          O e-mail é obrigatório.
+        </small>
+        <small class="text-danger" *ngIf="clienteForm.get('email')?.hasError('email')">
+          Por favor, insira um e-mail válido.
+        </small>
+      </div>
+    </div>
+  
+    <!-- Linha 3: Telefone e Cargo -->
+    <div class="form-row">
+      <label>
+        Telefone *:
+        <input formControlName="telefone" type="tel" maxlength="20" required />
+      </label>
+      <label>
+        Cargo:
+        <input formControlName="cargo" type="text" maxlength="25" />
+      </label>
+    </div>
+  
+    <!-- Botões -->
+    <div class="form-buttons">
+      <a routerLink="../home" class="btn-voltar">Voltar</a>
+      <button type="submit" [disabled]="!clienteForm.valid">Salvar Cliente</button>
+      <button type="button" (click)="cancelarCadastro()" class="cancelar">Cancelar</button>
+    </div>
+  </form>
+
+  <!-- Formulário de Cadastro de Projeto -->
+  <form
+    *ngIf="clienteCadastrado"
+    (ngSubmit)="adicionarProjeto()"
+    [formGroup]="projetoForm"
+  >
+    <h3>Dados do Projeto</h3>
+    <label>
+      Nome do Projeto:
+      <input formControlName="nomeProjeto" type="text" required />
+    </label>
+    <label>
+      Categoria:
+      <input formControlName="categoria" type="text" required/>
+    </label>
+    <label>
+      Duração (em dias):
+      <input formControlName="duracao" type="number" required />
+    </label>
+    <label>
+      Descrição do Projeto:
+      <textarea formControlName="descricao" required rows="4"></textarea>
+    </label>
+    <label>
+      Status:
+      <select formControlName="status">
+        <option value="aberto">Aberto</option>
+        <option value="fechado">Fechado</option>
+        <option value="em andamento">Em Andamento</option>
+        <option value="aguardando proposta">Aguardando Proposta</option>
+        <option value="concluido">Concluído</option>
+        <option value="cancelado">Cancelado</option>
+      </select>
+    </label>
+
+    <!-- Botões de Voltar e Salvar -->
+    <div class="form-buttons">
+      <a routerLink="../home" class="btn-voltar">Voltar</a>
+      <button type="submit" [disabled]="!projetoForm.valid">Salvar Projeto</button>
+    </div>
+  </form>
+
+  <!-- Lista de Projetos -->
+  <div *ngIf="projetos.length > 0">
+    <h3>Projetos do Cliente</h3>
+    <ul>
+      <li *ngFor="let projeto of projetos">
+        {{ projeto.nomeProjeto }} - {{ projeto.status }} ({{ projeto.duracao }} dias)
+      </li>
+    </ul>
+  </div>
+</div>

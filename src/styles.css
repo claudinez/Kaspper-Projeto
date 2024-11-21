@@ -1,1 +1,40 @@
-/* You can add global styles to this file, and also import other style files */
+/* Ajuste a fonte global */
+body {
+    font-family: 'Arial', sans-serif; /* Escolha a fonte que preferir */
+    font-size: 16px; /* Tamanho de fonte adequado */
+    line-height: 1.5; /* Altura da linha para melhorar a legibilidade */
+    color: #333; /* Cor padrão do texto */
+  }
+  
+  /* Melhorar títulos (usando classes do Bootstrap como .h1, .h2, etc.) */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Georgia', serif; /* Fonte serifada para títulos */
+    font-weight: bold;
+    color: #0056b3; /* Cor para os títulos */
+  }
+  
+  /* Ajuste de links */
+  a {
+    color: #007bff; /* Cor do link */
+    text-decoration: none; /* Remover sublinhado */
+  }
+  
+  a:hover {
+    text-decoration: underline; /* Sublinear quando o link é focado */
+  }
+  
+  /* Estilo para os botões */
+  .btn {
+    font-weight: bold;
+  }
+  
+  /* Personalizar os inputs */
+  input, select, button {
+    font-size: 16px; /* Tamanho da fonte nos campos */
+  }
+  
+  /* Melhorar o espaçamento de linhas em parágrafos */
+  p {
+    line-height: 1.75; /* Aumentar a altura da linha para maior legibilidade */
+  }
+  

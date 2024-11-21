@@ -1,0 +1,178 @@
+.orcamento-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin: 10px 0;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 50px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background-color: #e0e0e0;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+.btn-voltar {
+  background-color: #4CAF50; /* Cor verde */
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-voltar:hover {
+  background-color: #45a049; /* Cor verde escuro quando o mouse passa */
+}
+
+.form-buttons {
+  display: flex;
+  gap: 10px; /* Espaçamento uniforme entre os botões */
+  margin-top: 20px;
+}
+
+.form-buttons a,
+.form-buttons button {
+  flex: 1; /* Distribuir largura de forma igual entre os botões */
+  height: 50px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.form-buttons button.cancelar {
+  background-color: #dc3545; /* Cor vermelha para o botão Cancelar */
+}
+
+.form-buttons button.cancelar:hover {
+  background-color: #c82333; /* Vermelho mais escuro ao passar o mouse */
+}
+
+
+/*  Formulario Cliente */
+/* Estilos Gerais */
+label {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin: 0 10px; /* Espaçamento entre os campos */
+}
+
+/* Estilos das Linhas */
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px; /* Espaçamento horizontal */
+  margin-bottom: 20px;
+}
+
+/* Inputs */
+input {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%; /* Respeita o tamanho flexível */
+}
+
+/* Botões */
+.form-buttons {
+  display: flex;
+  gap: 10px; /* Espaçamento entre os botões */
+  margin-top: 20px;
+}
+
+.form-buttons a,
+.form-buttons button {
+  flex: 1;
+  height: 50px;
+  text-align: center;
+  font-size: 16px;
+}
+
+/* Estilos para o Textarea */
+textarea {
+  width: 100%; /* Ocupa toda a largura do elemento pai */
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical; /* Permite redimensionar verticalmente */
+}
+
+
+/* Estilo para o campo de input */
+input[type="email"] {
+  display: block; /* Faz o campo ocupar toda a largura */
+  width: 100%; /* Torna o campo 100% da largura do seu contêiner */
+  max-width: 100%; /* Limita a largura máxima a 100% */
+  min-width: 300px; /* Define um limite mínimo de largura para o campo */
+  padding: 10px; /* Ajusta o espaçamento interno do campo */
+  font-size: 14px; /* Define o tamanho da fonte */
+  border: 1px solid #ccc; /* Borda do campo */
+  border-radius: 4px; /* Bordas arredondadas */
+  margin-bottom: 5px; /* Espaço entre o campo e a mensagem de erro */
+  box-sizing: border-box; /* Inclui padding e borda no tamanho do campo */
+}
+
+/* Estilo para a mensagem de erro */
+.error-message {
+  margin-top: 5px; /* Espaço entre o campo de input e a mensagem de erro */
+  margin-left: 0; /* Garante que a mensagem de erro começa na margem esquerda */
+  padding-left: 0; /* Remove o espaçamento à esquerda da mensagem de erro */
+  text-align: left; /* Alinha o texto das mensagens de erro à esquerda */
+}
+
+
+/* Ajuste do campo quando o erro é mostrado */
+input[type="email"]:invalid {
+  border-color: #e74c3c; /* Altera a cor da borda para vermelho quando o campo é inválido */
+}
