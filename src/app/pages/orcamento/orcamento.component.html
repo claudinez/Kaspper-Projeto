@@ -21,11 +21,13 @@
     <div class="form-row">
       <label>
         Nome *:
-        <input formControlName="nome" type="text" maxlength="50" required />
+        <input formControlName="nome" type="text" maxlength="50" required (input)="contarCaracteres('nome')" />
+        <small>{{ clienteForm.get('nome')?.value.length || 0 }} / 50 caracteres</small>
       </label>
       <label>
         Sobrenome *:
-        <input formControlName="sobrenome" type="text" maxlength="50" required />
+        <input formControlName="sobrenome" type="text" maxlength="50" required  (input)="contarCaracteres('sobrenome')"/>
+        <small>{{ clienteForm.get('sobrenome')?.value.length || 0 }} / 50 caracteres</small>
       </label>
     </div>
   

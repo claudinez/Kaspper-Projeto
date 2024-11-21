@@ -17,9 +17,9 @@ export class OrcamentoComponent {
 
   constructor(private fb: FormBuilder) {
     this.clienteForm = this.fb.group({
-      nome: ['', Validators.required],
-      sobrenome: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      nome: ['', [Validators.required, Validators.maxLength(50)]],
+      sobrenome: ['', [Validators.required, Validators.maxLength(50)]],
+      email: ['', [Validators.required, Validators.maxLength(100)]],
       telefone: ['', [Validators.required]],
       cargo: ['', [Validators.maxLength(25)]],
     });
@@ -28,8 +28,14 @@ export class OrcamentoComponent {
       nomeProjeto: ['', Validators.required],
       categoria: [''],
       duracao: ['', [Validators.required]],
-      status: ['aberto',[Validators.required]], //deixa fixo valor
+      status: ['aberto', [Validators.required]], // deleta fixo valor
     });
+  }
+
+  // Função para contar caracteres
+  contarCaracteres(campo: string): void {
+    const valorCampo = this.clienteForm.get(campo)?.value || '';  // Obtém o valor do campo
+    console.log(`Contando caracteres do campo ${campo}: ${valorCampo.length} caracteres.`);
   }
 
   adicionarCliente() {
@@ -38,13 +44,13 @@ export class OrcamentoComponent {
       this.mensagemTipo = 'success';
       this.clienteCadastrado = true;
 
-       // Desabilita o formulário de cliente
-       this.clienteForm.disable();
-      } else {
-        this.mensagem = 'Por favor, preencha todos os campos obrigatórios.';
-        this.mensagemTipo = 'error';
-      }
+      // Desabilita o formulário de cliente
+      this.clienteForm.disable();
+    } else {
+      this.mensagem = 'Por favor, preencha todos os campos obrigatórios.';
+      this.mensagemTipo = 'error';
     }
+  }
 
   adicionarProjeto() {
     if (this.projetoForm.valid) {
@@ -65,5 +71,4 @@ export class OrcamentoComponent {
     this.clienteCadastrado = false;
     this.mensagem = '';
   }
-
 }
