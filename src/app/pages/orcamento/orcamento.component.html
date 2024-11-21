@@ -77,16 +77,23 @@
       <input formControlName="nomeProjeto" type="text" required />
     </label>
     <label>
-      Categoria:
+      Categoria do Projeto:
       <input formControlName="categoria" type="text" required/>
     </label>
     <label>
-      Duração (em dias):
-      <input formControlName="duracao" type="number" required />
+      Descreva o Projeto:
+      <textarea formControlName="descricao" required rows="4"></textarea>
     </label>
     <label>
-      Descrição do Projeto:
-      <textarea formControlName="descricao" required rows="4"></textarea>
+      Em quantos dias quer receber sua proposta?
+      <select formControlName="duracao" required>
+        <option value="urgente">Urgente</option>
+        <option value="3">3 dias</option>
+        <option value="7">7 dias</option>
+        <option value="15">15 dias</option>
+        <option value="30">30 dias</option>
+        <option value="semdata">Não tem data definida</option>
+      </select>
     </label>
     <label>
       Status:
@@ -99,7 +106,7 @@
         <option value="cancelado">Cancelado</option>
       </select>
     </label>
-
+   
     <!-- Botões de Voltar e Salvar -->
     <div class="form-buttons">
       <a routerLink="../home" class="btn-voltar">Voltar</a>

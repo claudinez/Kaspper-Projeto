@@ -27,8 +27,8 @@ export class OrcamentoComponent {
     this.projetoForm = this.fb.group({
       nomeProjeto: ['', Validators.required],
       categoria: [''],
-      duracao: ['', [Validators.required, Validators.min(1)]],
-      status: ['aberto', Validators.required]
+      duracao: ['', [Validators.required]],
+      status: ['aberto',[Validators.required]], //deixa fixo valor
     });
   }
 
