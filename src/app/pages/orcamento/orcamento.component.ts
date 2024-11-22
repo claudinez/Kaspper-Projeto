@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
 
+// Valida o email no dominio
 export function emailValido(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -15,6 +16,7 @@ export function emailValido(): ValidatorFn {
   templateUrl: './orcamento.component.html',
   styleUrls: ['./orcamento.component.css']
 })
+
 export class OrcamentoComponent {
   clienteForm: FormGroup;
   projetoForm: FormGroup;
@@ -53,20 +55,22 @@ export class OrcamentoComponent {
     }
   }
 
+  // Método para dividir as palavras
   filtrarPalavras(): void {
     const descricao = this.projetoForm.get('descricao')?.value || '';
     const palavras: string[] = descricao.split(/\s+/); // Divide a descrição em palavras
   
     // Lista de palavras específicas que você deseja filtrar
     const palavrasEspecificas = ['linguagem','angular', 'java', 'typescript', 'cloud', 'projeto',
-                                'postgres', 'react', 'html', 'css', 'oracle']; // Coloque todas as palavras em minúsculo
+                                'postgres', 'react', 'html', 'css', 'oracle', 'mysql', 'node.js','python']; // Coloque todas as palavras em minúsculo
   
     // Filtra palavras que estejam na lista específica, ignorando maiúsculas/minúsculas
     this.palavrasFiltradas = palavras.filter((palavra: string) =>
       palavrasEspecificas.includes(palavra.toLowerCase()) // Converte a palavra para minúsculo
     );
   }
-    
+  
+  // adiciona cliente
   adicionarCliente() {
     const emailControl = this.clienteForm.get('email');
     if (this.clienteForm.valid && emailControl?.valid) {
@@ -82,6 +86,7 @@ export class OrcamentoComponent {
     }
   }
 
+  //adiciona projeto
   adicionarProjeto() {
     if (this.projetoForm.valid) {
       this.projetos.push(this.projetoForm.value);
@@ -94,6 +99,7 @@ export class OrcamentoComponent {
     }
   }
 
+  //cancela cadastro
   cancelarCadastro() {
     this.clienteForm.reset();
     this.clienteForm.enable();

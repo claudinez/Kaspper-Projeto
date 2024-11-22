@@ -20,12 +20,12 @@
     <!-- Linha 1: Nome e Sobrenome -->
     <div class="form-row">
       <label>
-        Nome *:
+        Nome <span class="required">*</span>:
         <input formControlName="nome" type="text" maxlength="50" required (input)="contarCaracteres('nome')" />
         <small>{{ clienteForm.get('nome')?.value.length || 0 }} / 50 caracteres</small>
       </label>
       <label>
-        Sobrenome *:
+        Sobrenome <span class="required">*</span>:
         <input formControlName="sobrenome" type="text" maxlength="50" required  (input)="contarCaracteres('sobrenome')"/>
         <small>{{ clienteForm.get('sobrenome')?.value.length || 0 }} / 50 caracteres</small>
       </label>
@@ -34,15 +34,8 @@
     <!-- Linha 2: E-mail -->
     <div>
       <label for="email">
-        E-mail *:
-        <input
-          id="email"
-          formControlName="email"
-          type="email"
-          maxlength="100"
-          required
-          (input)="clienteForm.get('email')?.updateValueAndValidity()"
-        />
+        E-mail <span class="required">*</span>:
+        <input formControlName="email" type="email" maxlength="100" class="input-full-width" required />
       </label>
       <div *ngIf="clienteForm.get('email')?.invalid && clienteForm.get('email')?.touched" class="error-message">
         <small class="text-danger" *ngIf="clienteForm.get('email')?.hasError('emailInvalido')">
@@ -54,12 +47,12 @@
     <!-- Linha 3: Telefone e Cargo -->
     <div class="form-row">
       <label>
-        Telefone *:
+        Telefone <span class="required">*</span>:
         <input formControlName="telefone" type="tel" maxlength="20" required />
       </label>
       <label>
         Cargo:
-        <input formControlName="cargo" type="text" maxlength="25" />
+        <input formControlName="cargo" type="text" maxlength="25"  placeholder= "Ex.: Gerente, Administrador, etc." />
       </label>
     </div>
   
@@ -87,7 +80,7 @@
       <input formControlName="categoria" type="text" required/>
     </label>
 
-     <!-- Box Descrição Projeto -->
+     <!-- Descrição Projeto -->
      <div class="descricao-projeto-box">
         <label for="descricao">Descrição do Projeto</label>
        <textarea
@@ -103,7 +96,7 @@
        {{ palavrasFiltradas.join(', ') }}
      </textarea>
 
-
+     <!-- Proposta dias para receber -->
     <label>
       Em quantos dias quer receber sua proposta?
       <select formControlName="duracao" required>

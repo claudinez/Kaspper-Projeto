@@ -26,7 +26,7 @@ select {
 }
 
 button {
-  background-color: #007bff;
+  background-color: #06cc42;
   color: white;
   border: none;
   border-radius: 5px;
@@ -58,7 +58,7 @@ li {
 }
 
 .btn-voltar {
-  background-color: #4CAF50; /* Cor verde */
+  background-color: #f1e579; /* Cor Amarelo Pastel */
   color: white;
   text-decoration: none;
   border-radius: 5px;
@@ -71,7 +71,7 @@ li {
 }
 
 .btn-voltar:hover {
-  background-color: #45a049; /* Cor verde escuro quando o mouse passa */
+  background-color: #cae065; /* Cor verde escuro quando o mouse passa */
 }
 
 .form-buttons {
@@ -149,6 +149,7 @@ textarea {
   margin-top: 10px; /* Adiciona um espaçamento superior */
   box-sizing: border-box; /* Garante que o padding e border sejam contados dentro da largura total */
 }
+
 /* Box Descrição Projeto */
 .descricao-projeto-box {
   margin-bottom: 20px; /* Espaço entre os campos */
@@ -199,8 +200,8 @@ input[type="email"]:invalid {
   font-size: 14px;
 }
 .alert-success {
-  background-color: #d4edda;
-  color: #155724;
+  background-color: #d9f8e0;
+  color: #135c23;
   border: 1px solid #c3e6cb;
 }
 
@@ -221,4 +222,24 @@ input[type="email"]:invalid {
 
 .uppercase {
   text-transform: uppercase;
+}
+
+/* colocando vermelho no * */
+.required {
+  color: red;
+  font-size: 1em;
+  vertical-align: middle; /* Alinha o asterisco com o texto */
+  margin-left: 2px; /* Pequeno espaço entre o texto e o asterisco */
+}
+
+.input-full-width {
+  width: 100%; /* Faz o campo ocupar 100% da largura do contêiner */
+  padding: 10px; /* Ajusta o espaçamento interno */
+  font-size: 16px; /* Torna o texto mais legível */
+  box-sizing: border-box; /* Inclui o padding e a borda no tamanho total */
+}
+
+label {
+  display: block; /* Faz o label ocupar toda a largura */
+  margin-bottom: 5px; /* Espaçamento entre o label e o input */
 }
