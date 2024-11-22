@@ -141,13 +141,28 @@ input {
 /* Estilos para o Textarea */
 textarea {
   width: 100%; /* Ocupa toda a largura do elemento pai */
-  padding: 10px;
+  padding: 15px;
   font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 5px;
   resize: vertical; /* Permite redimensionar verticalmente */
+  margin-top: 10px; /* Adiciona um espaçamento superior */
+  box-sizing: border-box; /* Garante que o padding e border sejam contados dentro da largura total */
+}
+/* Box Descrição Projeto */
+.descricao-projeto-box {
+  margin-bottom: 20px; /* Espaço entre os campos */
+  max-width: 100%; /* Garantir que o box não ultrapasse os limites do contêiner */
+  box-sizing: border-box; /* Garantir que padding e border não aumentem a largura total */
 }
 
+/* Título "Descrição do Projeto" */
+.descricao-projeto-box label {
+  display: block;
+  font-size: 14px; /* Tamanho da fonte */
+  margin-bottom: 8px; /* Espaço entre o título e o campo de descrição */
+  text-transform: uppercase; /* Para deixar o texto em maiúsculas */
+}
 
 /* Estilo para o campo de input */
 input[type="email"] {
@@ -202,4 +217,8 @@ input[type="email"]:invalid {
   color: #e74c3c; /* Vermelho vibrante */
   font-size: 16px;
   margin-top: 5px;
+}
+
+.uppercase {
+  text-transform: uppercase;
 }

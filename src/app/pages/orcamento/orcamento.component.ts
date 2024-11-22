@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'; // Adicione isso
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { ChangeDetectorRef } from '@angular/core';
 
 export function emailValido(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -14,25 +15,19 @@ export function emailValido(): ValidatorFn {
   templateUrl: './orcamento.component.html',
   styleUrls: ['./orcamento.component.css']
 })
-
 export class OrcamentoComponent {
   clienteForm: FormGroup;
   projetoForm: FormGroup;
   clienteCadastrado = false;
   projetos: any[] = [];
+  palavrasFiltradas: string[] = [];
+  mensagem: string = '';
+  mensagemTipo: 'success' | 'error' = 'success';
 
-  mensagem: string = ''; // Texto da mensagem
-  mensagemTipo: 'success' | 'error' = 'success'; // Tipo da mensagem (sucesso ou erro)
-
-  exibirMensagem(tipo: 'success' | 'error', texto: string): void {
-    this.mensagemTipo = tipo; // Define o tipo (ex.: success ou error)
-    this.mensagem = texto; // Define o texto da mensagem
-    setTimeout(() => {
-      this.mensagem = ''; // Remove a mensagem após 3 segundos
-    }, 3000);
-  }
-
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private cdr: ChangeDetectorRef
+  ) {
     this.clienteForm = this.fb.group({
       nome: ['', [Validators.required, Validators.maxLength(50)]],
       sobrenome: ['', [Validators.required, Validators.maxLength(50)]],
@@ -44,33 +39,45 @@ export class OrcamentoComponent {
     this.projetoForm = this.fb.group({
       nomeProjeto: ['', Validators.required],
       categoria: [''],
+      descricao: ['', [Validators.required]],
       duracao: ['', [Validators.required]],
-      status: ['aberto', [Validators.required]], // deleta fixo valor
+      status: ['aberto', [Validators.required]],
     });
   }
 
-  // Função para contar caracteres
+  // Método para contar os caracteres digitados no campo
   contarCaracteres(campo: string): void {
-    const valorCampo = this.clienteForm.get(campo)?.value || '';  // Obtém o valor do campo
-    console.log(`Contando caracteres do campo ${campo}: ${valorCampo.length} caracteres.`);
+    const campoControl = this.clienteForm.get(campo);
+    if (campoControl) {
+      console.log(`${campo}: ${campoControl.value.length} caracteres`);
+    }
   }
 
+  filtrarPalavras(): void {
+    const descricao = this.projetoForm.get('descricao')?.value || '';
+    const palavras: string[] = descricao.split(/\s+/); // Divide a descrição em palavras
+  
+    // Lista de palavras específicas que você deseja filtrar
+    const palavrasEspecificas = ['linguagem','angular', 'java', 'typescript', 'cloud', 'projeto',
+                                'postgres', 'react', 'html', 'css', 'oracle']; // Coloque todas as palavras em minúsculo
+  
+    // Filtra palavras que estejam na lista específica, ignorando maiúsculas/minúsculas
+    this.palavrasFiltradas = palavras.filter((palavra: string) =>
+      palavrasEspecificas.includes(palavra.toLowerCase()) // Converte a palavra para minúsculo
+    );
+  }
+    
   adicionarCliente() {
     const emailControl = this.clienteForm.get('email');
-
     if (this.clienteForm.valid && emailControl?.valid) {
       this.mensagem = 'Cliente salvo com sucesso!';
       this.mensagemTipo = 'success';
       this.clienteCadastrado = true;
-
-      // Desabilita o formulário de cliente
       this.clienteForm.disable();
     } else {
-      if (emailControl?.invalid) {
-        this.mensagem = 'Por favor, insira um e-mail válido.';
-      } else {
-        this.mensagem = 'Por favor, preencha todos os campos obrigatórios.';
-      }
+      this.mensagem = emailControl?.invalid
+        ? 'Por favor, insira um e-mail válido.'
+        : 'Por favor, preencha todos os campos obrigatórios.';
       this.mensagemTipo = 'error';
     }
   }
@@ -88,7 +95,6 @@ export class OrcamentoComponent {
   }
 
   cancelarCadastro() {
-    // Reseta o formulário de cliente e reabilita os campos
     this.clienteForm.reset();
     this.clienteForm.enable();
     this.clienteCadastrado = false;

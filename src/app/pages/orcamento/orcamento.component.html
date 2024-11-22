@@ -86,10 +86,24 @@
       Categoria do Projeto:
       <input formControlName="categoria" type="text" required/>
     </label>
-    <label>
-      Descreva o Projeto:
-      <textarea formControlName="descricao" required rows="4"></textarea>
-    </label>
+
+     <!-- Box Descrição Projeto -->
+     <div class="descricao-projeto-box">
+        <label for="descricao">Descrição do Projeto</label>
+       <textarea
+        id="descricao"
+        formControlName="descricao"
+        rows="4"
+        (input)="filtrarPalavras()"
+       ></textarea>
+     </div>
+
+     <!-- Campo para exibir palavras filtradas -->
+     <textarea id="palavrasFiltradas" readonly rows="2" style="pointer-events: none; background: #f9f9f9;">
+       {{ palavrasFiltradas.join(', ') }}
+     </textarea>
+
+
     <label>
       Em quantos dias quer receber sua proposta?
       <select formControlName="duracao" required>
