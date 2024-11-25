@@ -62,7 +62,7 @@ export class OrcamentoComponent {
   
     // Lista de palavras específicas que você deseja filtrar
     const palavrasEspecificas = ['linguagem','angular', 'java', 'typescript', 'cloud', 'projeto',
-                                'postgres', 'react', 'html', 'css', 'oracle', 'mysql', 'node.js','python']; // Coloque todas as palavras em minúsculo
+                                'postgres', 'react', 'html', 'css', 'oracle', 'mysql', 'node.js','python', 'web', 'desktop']; // Coloque todas as palavras em minúsculo
   
     // Filtra palavras que estejam na lista específica, ignorando maiúsculas/minúsculas
     this.palavrasFiltradas = palavras.filter((palavra: string) =>

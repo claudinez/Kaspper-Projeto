@@ -3,8 +3,9 @@
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #ccc;
-  border-radius: 10px;
+  border-radius: 15px;
   background-color: #f9f9f9;
+  margin-top: 5px;  /* Pequeno ajuste para tirar o espaço acima */
 }
 
 form {
@@ -17,12 +18,19 @@ label {
 }
 
 input,
-select {
+select,
+textarea {
   width: 100%;
   padding: 10px;
   margin-top: 5px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 15px;
+  box-sizing: border-box; /* Garantir que padding e border não aumentem a largura total */
+}
+
+textarea {
+  resize: vertical;
+  margin-top: 10px;
 }
 
 button {
@@ -54,7 +62,7 @@ li {
   background-color: #e0e0e0;
   padding: 10px;
   margin: 5px 0;
-  border-radius: 5px;
+  border-radius: 15px;
 }
 
 .btn-voltar {
@@ -96,22 +104,21 @@ li {
   background-color: #c82333; /* Vermelho mais escuro ao passar o mouse */
 }
 
-
 /*  Formulario Cliente */
 /* Estilos Gerais */
 label {
   display: flex;
   flex-direction: column;
   flex: 1;
-  margin: 0 10px; /* Espaçamento entre os campos */
+  margin: 0 5px; /* Espaçamento entre os campos */
 }
 
-/* Estilos das Linhas */
+/* Estilos para o Formulário de Cliente e Projeto */
 .form-row {
   display: flex;
   justify-content: space-between;
-  gap: 10px; /* Espaçamento horizontal */
-  margin-bottom: 20px;
+  gap: 15px; /* Ajuste de espaçamento entre os campos */
+  margin-bottom: 10px;
 }
 
 /* Inputs */
@@ -119,11 +126,11 @@ input {
   padding: 10px;
   font-size: 14px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 15px;
   width: 100%; /* Respeita o tamanho flexível */
 }
 
-/* Botões */
+/* Botões de Voltar e Salvar */
 .form-buttons {
   display: flex;
   gap: 10px; /* Espaçamento entre os botões */
@@ -140,14 +147,19 @@ input {
 
 /* Estilos para o Textarea */
 textarea {
-  width: 100%; /* Ocupa toda a largura do elemento pai */
   padding: 15px;
-  font-size: 14px;
+  font-size: 16px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 15px;
   resize: vertical; /* Permite redimensionar verticalmente */
   margin-top: 10px; /* Adiciona um espaçamento superior */
   box-sizing: border-box; /* Garante que o padding e border sejam contados dentro da largura total */
+}
+
+/* Ajuste para a caixa de texto (textarea) */
+textarea#descricaoProjeto {
+  font-size: 16px;
+  margin-top: 10px; /* Ajuste para mover o campo de texto para cima */
 }
 
 /* Box Descrição Projeto */
@@ -160,33 +172,38 @@ textarea {
 /* Título "Descrição do Projeto" */
 .descricao-projeto-box label {
   display: block;
-  font-size: 14px; /* Tamanho da fonte */
-  margin-bottom: 8px; /* Espaço entre o título e o campo de descrição */
-  text-transform: uppercase; /* Para deixar o texto em maiúsculas */
+  font-size: 16px; /* Tamanho da fonte */
+  margin-bottom: 2px; /* Espaço entre o título e o campo de descrição */
+  margin-top: 10px; /* Valor negativo para mover para cima */
+  text-transform: none; /* Para deixar o texto em maiúsculas */
 }
 
 /* Estilo para o campo de input */
-input[type="email"] {
+input[type="email"],
+input[type="text"]
+select {
   display: block; /* Faz o campo ocupar toda a largura */
   width: 100%; /* Torna o campo 100% da largura do seu contêiner */
-  max-width: 100%; /* Limita a largura máxima a 100% */
-  min-width: 300px; /* Define um limite mínimo de largura para o campo */
   padding: 10px; /* Ajusta o espaçamento interno do campo */
   font-size: 14px; /* Define o tamanho da fonte */
   border: 1px solid #ccc; /* Borda do campo */
-  border-radius: 4px; /* Bordas arredondadas */
-  margin-bottom: 5px; /* Espaço entre o campo e a mensagem de erro */
+  border-radius: 15px; /* Bordas arredondadas */
+  margin-top: 1px; /* Faz o campo "subir" em relação ao telefone */
   box-sizing: border-box; /* Inclui padding e borda no tamanho do campo */
+}
+
+/* Ajuste do campo quando o erro é mostrado */
+input[type="email"]:invalid,
+input[type="text"]:invalid {
+  border-color: #e74c3c; /* Altera a cor da borda para vermelho quando o campo é inválido */
 }
 
 /* Estilo para a mensagem de erro */
 .error-message {
   margin-top: 5px; /* Espaço entre o campo de input e a mensagem de erro */
-  margin-left: 0; /* Garante que a mensagem de erro começa na margem esquerda */
-  padding-left: 0; /* Remove o espaçamento à esquerda da mensagem de erro */
-  text-align: left; /* Alinha o texto das mensagens de erro à esquerda */
+  color: #e74c3c; /* Vermelho vibrante */
+  font-size: 16px;
 }
-
 
 /* Ajuste do campo quando o erro é mostrado */
 input[type="email"]:invalid {
@@ -237,6 +254,7 @@ input[type="email"]:invalid {
   padding: 10px; /* Ajusta o espaçamento interno */
   font-size: 16px; /* Torna o texto mais legível */
   box-sizing: border-box; /* Inclui o padding e a borda no tamanho total */
+  margin-top: 0; /* Remove qualquer espaçamento adicional aplicado ao email */
 }
 
 label {

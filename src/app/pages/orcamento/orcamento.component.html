@@ -20,12 +20,12 @@
     <!-- Linha 1: Nome e Sobrenome -->
     <div class="form-row">
       <label>
-        Nome <span class="required">*</span>:
+        Nome <span class="required">*</span>
         <input formControlName="nome" type="text" maxlength="50" required (input)="contarCaracteres('nome')" />
         <small>{{ clienteForm.get('nome')?.value.length || 0 }} / 50 caracteres</small>
       </label>
       <label>
-        Sobrenome <span class="required">*</span>:
+        Sobrenome <span class="required">*</span>
         <input formControlName="sobrenome" type="text" maxlength="50" required  (input)="contarCaracteres('sobrenome')"/>
         <small>{{ clienteForm.get('sobrenome')?.value.length || 0 }} / 50 caracteres</small>
       </label>
@@ -34,7 +34,7 @@
     <!-- Linha 2: E-mail -->
     <div>
       <label for="email">
-        E-mail <span class="required">*</span>:
+        E-mail <span class="required">*</span>
         <input formControlName="email" type="email" maxlength="100" class="input-full-width" required />
       </label>
       <div *ngIf="clienteForm.get('email')?.invalid && clienteForm.get('email')?.touched" class="error-message">
@@ -43,7 +43,6 @@
         </small>
       </div>
     </div>
-  
     <!-- Linha 3: Telefone e Cargo -->
     <div class="form-row">
       <label>
@@ -73,16 +72,16 @@
     <h3>Dados do Projeto</h3>
     <label>
       Nome do Projeto:
-      <input formControlName="nomeProjeto" type="text" required />
+      <input formControlName="nomeProjeto" type="text" required placeholder= "Ex.: Nome Sistema" />
     </label>
     <label>
       Categoria do Projeto:
-      <input formControlName="categoria" type="text" required/>
+      <input formControlName="categoria" type="text" required placeholder= "Ex.: Desktop ou Web"/>
     </label>
 
      <!-- Descrição Projeto -->
      <div class="descricao-projeto-box">
-        <label for="descricao">Descrição do Projeto</label>
+        <label for="descricao">Detalhe seu Projeto</label>
        <textarea
         id="descricao"
         formControlName="descricao"
@@ -108,6 +107,8 @@
         <option value="semdata">Não tem data definida</option>
       </select>
     </label>
+
+    <!-- Status do Projeto -->
     <label>
       Status:
       <select formControlName="status">
