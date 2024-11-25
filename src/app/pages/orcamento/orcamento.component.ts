@@ -58,7 +58,7 @@ export class OrcamentoComponent {
   // Método para dividir as palavras
   filtrarPalavras(): void {
     const descricao = this.projetoForm.get('descricao')?.value || '';
-    const palavras: string[] = descricao.split(/\s+/); // Divide a descrição em palavras
+    const palavras: string[] = descricao.split(/[\s,]+/); // Divide a descrição em palavras
   
     // Lista de palavras específicas que você deseja filtrar
     const palavrasEspecificas = ['linguagem','angular', 'java', 'typescript', 'cloud', 'projeto',
