@@ -1,0 +1,29 @@
+<form (submit)="buscarOrcamento(); $event.preventDefault()">
+  <div class="form-group flex-container">
+    <div>
+      <label for="numeroOrcamento">Número do Orçamento:</label>
+      <input id="numeroOrcamento" [(ngModel)]="numeroOrcamento" name="numeroOrcamento" />
+    </div>
+    <div>
+      <label for="nomeCliente">Nome do Cliente:</label>
+      <input id="nomeCliente" [(ngModel)]="nomeCliente" name="nomeCliente" />
+    </div>
+    <div>
+      <label for="telefone">Numero do Celular:</label>
+      <input id="telefone" [(ngModel)]="telefone" name="telefone" />
+    </div>
+  </div>
+
+  <div class="form-actions">
+      <button type="button" class="voltar" (click)="Voltar()">Voltar</button>
+      <button type="submit">Buscar</button>
+  </div>
+</form>
+
+<div *ngIf="orcamentoEncontrado" class="orcamento-details">
+  <p><strong>Nome do Cliente:</strong> {{ orcamentoEncontrado.clienteNome }}</p>
+  <p><strong>Número do Orçamento:</strong> {{ orcamentoEncontrado.numero }}</p>
+  <p><strong>Status:</strong> {{ orcamentoEncontrado.status }}</p>
+  <p><strong>Valor:</strong> {{ orcamentoEncontrado.valor | currency }}</p>
+  <p><strong>Descrição:</strong> {{ orcamentoEncontrado.descricao }}</p>
+</div>

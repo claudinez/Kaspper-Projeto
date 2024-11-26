@@ -61,8 +61,8 @@ export class OrcamentoComponent {
     const palavras: string[] = descricao.split(/[\s,]+/); // Divide a descrição em palavras
   
     // Lista de palavras específicas que você deseja filtrar
-    const palavrasEspecificas = ['linguagem','angular', 'java', 'typescript', 'cloud', 'projeto',
-                                'postgres', 'react', 'html', 'css', 'oracle', 'mysql', 'node.js','python', 'web', 'desktop']; // Coloque todas as palavras em minúsculo
+    const palavrasEspecificas = ['linguagem','angular', 'java', 'typescript','javascript','php','html', 'css','react','node.js','python',
+                                 'postgres', 'oracle', 'mysql', 'web', 'desktop']; // Coloque todas as palavras em minúsculo
   
     // Filtra palavras que estejam na lista específica, ignorando maiúsculas/minúsculas
     this.palavrasFiltradas = palavras.filter((palavra: string) =>

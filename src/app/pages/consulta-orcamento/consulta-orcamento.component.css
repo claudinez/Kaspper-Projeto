@@ -1,0 +1,156 @@
+/* Estilo geral da página */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container principal */
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Linhas separadoras */
+.form-group {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Flex container para alinhamento lado a lado */
+.flex-container {
+    display: flex;
+    gap: 15px; /* Espaçamento entre os campos */
+}
+
+.flex-container div {
+    flex: 1; /* Permite que os campos ocupem o mesmo espaço */
+}
+
+/* Rótulos dos campos */
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+/* Campos de entrada */
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+    width: 50%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 15px; /* Bordas arredondadas */
+    box-sizing: border-box;
+    transition: border-color 0.3s ease-in-out;
+}
+
+/* Foco nos campos */
+.form-group input:focus, 
+.form-group select:focus, 
+.form-group textarea:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Campo de descrição com largura ajustada */
+.form-group textarea {
+    width: 80%;
+    max-width: 300px;
+    resize: vertical; /* Permite redimensionar apenas na vertical */
+}
+
+/* Botões */
+button {
+    background-color: #007bff;
+    color: #fff;
+    font-size: 14px; /* Botão menor */
+    padding: 8px 15px; /* Tamanho reduzido */
+    border: none;
+    border-radius: 15px; /* Bordas arredondadas */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: 5px; /* Espaçamento entre botões */
+    width: auto; /* Largura ajustável */
+    display: inline-block; /* Mantém botões lado a lado */
+}
+
+/* Botão de voltar */
+button.voltar {
+    background-color: #6c757d; /* Cor cinza */
+    color: #fff;
+}
+
+button.voltar:hover {
+    background-color: #5a6268;
+}
+
+/* Botão principal em hover */
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.03);
+}
+
+/* Botão desabilitado */
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Detalhes do orçamento */
+.orcamento-details {
+    margin-top: 30px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f7f7f7;
+}
+
+.orcamento-details h3 {
+    margin-top: 0;
+    font-size: 18px;
+    color: #007bff;
+}
+
+.orcamento-details p {
+    margin: 10px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .form-group textarea {
+        width: 100%; /* Campo ocupa toda a largura em telas pequenas */
+    }
+
+    button {
+        font-size: 12px; /* Botão ainda menor em telas menores */
+        padding: 6px 10px;
+    }
+
+    .flex-container {
+        flex-direction: column; /* Coloca os campos um embaixo do outro em telas pequenas */
+    }
+
+    .flex-container div {
+        flex: none;
+        width: 100%; /* Os campos ocupam 100% da largura em telas pequenas */
+    }
+}

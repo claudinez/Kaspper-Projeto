@@ -1,19 +1,27 @@
 .home-container {
-    text-align: center;
-    margin-top: 50px;
-  }
-  
-  .btn-primary {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .btn-primary:hover {
-    background-color: #0056b3;
-  }
+  text-align: center;
+  margin-top: 50px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Espaçamento entre os botões */
+  margin-top: 20px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
   

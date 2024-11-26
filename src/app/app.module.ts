@@ -5,18 +5,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { OrcamentoComponent } from './pages/orcamento/orcamento.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ConsultaOrcamentoComponent } from './pages/consulta-orcamento/consulta-orcamento.component';  // Verifique o caminho correto
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    OrcamentoComponent
+    OrcamentoComponent,
+    ConsultaOrcamentoComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    FormsModule, 
   ],
   providers: [],
   bootstrap: [AppComponent]
