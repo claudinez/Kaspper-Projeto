@@ -1,5 +1,5 @@
 .orcamento-container {
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #ccc;
@@ -176,6 +176,34 @@ textarea#descricaoProjeto {
   margin-bottom: 2px; /* Espaço entre o título e o campo de descrição */
   margin-top: 10px; /* Valor negativo para mover para cima */
   text-transform: none; /* Para deixar o texto em maiúsculas */
+}
+
+/* Estilização dos checkboxes Linguagens */
+.linguagens-checkboxes {
+  display: flex;
+  flex-wrap: wrap; /* Permite quebrar linha quando necessário */
+  gap: 20px; /* Espaçamento entre os itens */
+}
+
+.linguagens-checkboxes label {
+  display: flex;
+  flex-direction: column; /* Coloca o texto abaixo do checkbox */
+  align-items: center; /* Centraliza o texto e o checkbox */
+  gap: 5px; /* Espaço entre o checkbox e o texto */
+}
+
+/* Título "Checkboxes Banco de dados" */
+.bancos-checkboxes {
+  display: flex;
+  flex-wrap: wrap; /* Permite quebrar linha se necessário */
+  gap: 20px; /* Espaçamento entre os itens */
+}
+
+.bancos-checkboxes label {
+  display: flex;
+  flex-direction: column; /* Coloca o texto abaixo do checkbox */
+  align-items: center; /* Centraliza o texto e o checkbox */
+  gap: 5px; /* Espaço entre o checkbox e o texto */
 }
 
 /* Estilo para o campo de input */

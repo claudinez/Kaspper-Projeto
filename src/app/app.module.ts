@@ -7,6 +7,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { OrcamentoComponent } from './pages/orcamento/orcamento.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConsultaOrcamentoComponent } from './pages/consulta-orcamento/consulta-orcamento.component';  // Verifique o caminho correto
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ConsultaOrcamentoComponent } from './pages/consulta-orcamento/consulta-
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule, 
+    FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

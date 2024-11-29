@@ -21,7 +21,7 @@
     <div class="form-row">
       <label>
         Nome <span class="required">*</span>
-        <input formControlName="nome" type="text" maxlength="50" required (input)="contarCaracteres('nome')" />
+        <input formControlName="nome" type="text" maxlength="50" required (input)="contarCaracteres('nome')" autofocus />
         <small>{{ clienteForm.get('nome')?.value.length || 0 }} / 50 caracteres</small>
       </label>
       <label>
@@ -43,6 +43,7 @@
         </small>
       </div>
     </div>
+    
     <!-- Linha 3: Telefone e Cargo -->
     <div class="form-row">
       <label>
@@ -78,35 +79,62 @@
       Categoria do Projeto:
       <input formControlName="categoria" type="text" required placeholder= "Ex.: Desktop ou Web"/>
     </label>
+    
+    <!-- Coluna para seleção de Linguagens -->
+    <div class="descricao-projeto-box">
+      <label>Linguagens:</label>
+      <div class="linguagens-checkboxes">
+        <label *ngFor="let linguagem of linguagensDisponiveis">
+          <input 
+            type="checkbox" 
+            [value]="linguagem" 
+            (change)="onCheckboxChange($event)" 
+          />
+          <span>{{ linguagem }}</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Coluna para seleção de Bancos de Dados -->
+    <div class="descricao-projeto-box">
+      <label>Banco de Dados:</label>
+      <div class="bancos-checkboxes">
+        <label *ngFor="let banco of bancosDisponiveis">
+          <input 
+            type="checkbox" 
+            [value]="banco" 
+            (change)="onCheckboxChange($event)" 
+          />
+          <span>{{ banco }}</span>
+        </label>
+      </div>
+    </div>
+    
 
      <!-- Descrição Projeto -->
      <div class="descricao-projeto-box">
-        <label for="descricao">Detalhe seu Projeto</label>
+        <label for="descricao">Outras Linguagens / Banco de Dados</label>
        <textarea
         id="descricao"
-        formControlName="descricao"
-        rows="4"
+        formControlName="descricao" 
+        rows="1"
         (input)="filtrarPalavras()"
        ></textarea>
      </div>
 
      <!-- Campo para exibir palavras filtradas -->
-     <textarea id="palavrasFiltradas" readonly rows="2" style="pointer-events: none; background: #f9f9f9;">
+     <textarea id="palavrasFiltradas" readonly rows="1" style="pointer-events: none; background: #f9f9f9;">
        {{ palavrasFiltradas.join(', ') }}
      </textarea>
 
      <!-- Proposta dias para receber -->
-    <label>
-      Em quantos dias quer receber sua proposta?
-      <select formControlName="duracao" required>
+     <form [formGroup]="projetoForm">
+      <label for="duracao">Duração:</label>
+      <select id="duracao" formControlName="duracao" (change)="onDuracaoChange()">
+        <option value="normal">Normal</option>
         <option value="urgente">Urgente</option>
-        <option value="3">3 dias</option>
-        <option value="7">7 dias</option>
-        <option value="15">15 dias</option>
-        <option value="30">30 dias</option>
-        <option value="semdata">Não tem data definida</option>
       </select>
-    </label>
+    </form>
 
     <!-- Status do Projeto -->
     <label>

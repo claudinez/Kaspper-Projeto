@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component,  AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 // Valida o email no dominio
 export function emailValido(): ValidatorFn {
@@ -10,14 +11,15 @@ export function emailValido(): ValidatorFn {
     return emailRegex.test(control.value) ? null : { emailInvalido: true };
   };
 }
-
 @Component({
   selector: 'app-orcamento',
   templateUrl: './orcamento.component.html',
   styleUrls: ['./orcamento.component.css']
 })
 
-export class OrcamentoComponent {
+
+export class OrcamentoComponent  implements AfterViewInit{
+  @ViewChild('nomeInput') nomeInput: ElementRef | undefined;
   clienteForm: FormGroup;
   projetoForm: FormGroup;
   clienteCadastrado = false;
@@ -25,11 +27,17 @@ export class OrcamentoComponent {
   palavrasFiltradas: string[] = [];
   mensagem: string = '';
   mensagemTipo: 'success' | 'error' = 'success';
+  private readonly apiUrl = 'https://graph.facebook.com/v16.0/SEU_NUMERO_DE_TELEFONE/messages';
+  private readonly token = 'SEU_TOKEN_DE_AUTENTICACAO';
+isFormDisabled: any;
 
   constructor(
     private fb: FormBuilder,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private http: HttpClient 
+
   ) {
+
     this.clienteForm = this.fb.group({
       nome: ['', [Validators.required, Validators.maxLength(50)]],
       sobrenome: ['', [Validators.required, Validators.maxLength(50)]],
@@ -41,11 +49,76 @@ export class OrcamentoComponent {
     this.projetoForm = this.fb.group({
       nomeProjeto: ['', Validators.required],
       categoria: [''],
-      descricao: ['', [Validators.required]],
+      linguagens: [[]], // Campo de linguagens como uma lista
+      bancosDeDados: [[]], // Bancos de dados selecionados
+      descricao: ['', []],
       duracao: ['', [Validators.required]],
       status: ['aberto', [Validators.required]],
     });
   }
+
+  // Implementação do método ngAfterViewInit
+  ngAfterViewInit(): void {
+  if (this.nomeInput) {
+    this.nomeInput.nativeElement.focus();
+  }
+}
+
+   // Envia msg quando for urgente para whatsapp
+   enviarMensagemWhatsApp() {
+    // Captura o nome do cliente do formulário
+    const nomeCliente = this.clienteForm.get('nome')?.value;
+  
+    // Personaliza a mensagem com o nome do cliente
+    const mensagem = encodeURIComponent(
+      `Olá Sr.(a) ${nomeCliente}, uma nova proposta foi marcada como urgente. Por favor, verifique imediatamente!`
+    );
+  
+    const numeroWhatsApp = "5519991796458"; // Substitua pelo número do destinatário
+  
+    // Abre o WhatsApp com a mensagem personalizada
+    const url = `https://wa.me/${numeroWhatsApp}?text=${mensagem}`;
+    
+    // Tenta abrir o link
+    const newWindow = window.open(url, "_blank");
+  
+    // Verifica se o pop-up foi bloqueado
+    if (!newWindow) {
+      alert("Pop-up bloqueado! Por favor, habilite pop-ups para este site.");
+    }
+  }
+
+  // Check box para selecionar a linguagem requerida
+  onCheckboxChange(event: any) {
+    const linguagens = this.projetoForm.get('linguagens')?.value || [];
+  
+    if (event.target.checked) {
+      linguagens.push(event.target.value);
+    } else {
+      const index = linguagens.indexOf(event.target.value);
+      if (index > -1) {
+        linguagens.splice(index, 1);
+      }
+    }
+  
+    this.projetoForm.get('linguagens')?.setValue(linguagens);
+  }
+
+  linguagensDisponiveis: string[] = ['PHP', 'CSS', 'HTML', 'Java', 'Angular', 'GO', 'React', 'typescript','Node.js',
+                                     'Python', 'C#'];
+  
+  // Check box para selecionar a Banco de Dados 
+  onBancoCheckboxChange(event: any) {const bancosDeDados = this.projetoForm.get('bancosDeDados')?.value || [];
+    if (event.target.checked) {bancosDeDados.push(event.target.value);
+      } else {const index = bancosDeDados.indexOf(event.target.value);
+        if (index > -1) {bancosDeDados.splice(index, 1);
+          }
+        }
+        this.projetoForm.get('bancosDeDados')?.setValue(bancosDeDados);
+      }
+
+  bancosDisponiveis: string[] = ['Oracle', 'SQLServer', 'PostgreSQL', 'MariaDB', 'DB2', 'MongoDB', 
+                                 'Cassandra', 'SQLite'];
 
   // Método para contar os caracteres digitados no campo
   contarCaracteres(campo: string): void {
@@ -55,19 +128,27 @@ export class OrcamentoComponent {
     }
   }
 
-  // Método para dividir as palavras
+    // Método para dividir as palavras
   filtrarPalavras(): void {
     const descricao = this.projetoForm.get('descricao')?.value || '';
     const palavras: string[] = descricao.split(/[\s,]+/); // Divide a descrição em palavras
   
     // Lista de palavras específicas que você deseja filtrar
-    const palavrasEspecificas = ['linguagem','angular', 'java', 'typescript','javascript','php','html', 'css','react','node.js','python',
-                                 'postgres', 'oracle', 'mysql', 'web', 'desktop']; // Coloque todas as palavras em minúsculo
+    const palavrasEspecificas = ['javascript', 'cobol','postgres', 'delphi', 'firebird', 'firebase', 'desktop','nosql','access']; // Coloque todas as palavras em minúsculo
   
     // Filtra palavras que estejam na lista específica, ignorando maiúsculas/minúsculas
     this.palavrasFiltradas = palavras.filter((palavra: string) =>
       palavrasEspecificas.includes(palavra.toLowerCase()) // Converte a palavra para minúsculo
     );
+  }
+
+  // 
+
+  onDuracaoChange() {
+    const duracao = this.projetoForm.get('duracao')?.value;
+    if (duracao === 'urgente') {
+      this.enviarMensagemWhatsApp();
+    }
   }
   
   // adiciona cliente
@@ -86,24 +167,37 @@ export class OrcamentoComponent {
     }
   }
 
-  //adiciona projeto
-  adicionarProjeto() {
-    if (this.projetoForm.valid) {
-      this.projetos.push(this.projetoForm.value);
-      this.mensagem = 'Projeto salvo com sucesso!';
-      this.mensagemTipo = 'success';
-      this.projetoForm.reset({ status: 'aberto' });
-    } else {
-      this.mensagem = 'Por favor, preencha todos os campos obrigatórios!';
-      this.mensagemTipo = 'error';
+    // Adiciona projeto
+    adicionarProjeto() {
+      if (this.projetoForm.valid) {
+        const projeto = this.projetoForm.value;
+    
+        // Adiciona o projeto à lista (simulando o salvamento no banco de dados)
+        this.projetos.push(projeto);
+        this.mensagem = 'Projeto salvo com sucesso!';
+        this.mensagemTipo = 'success';
+    
+        // Reseta o formulário, preservando valores dos checkboxes
+        this.projetoForm.reset({
+          status: 'aberto',
+          duracao: '',
+          linguagens: [],
+          bancosDeDados: [],
+        });
+    
+        // Desabilita o formulário inteiro
+        this.projetoForm.disable();
+      } else {
+        this.mensagem = 'Por favor, preencha todos os campos obrigatórios!';
+        this.mensagemTipo = 'error';
+      }
     }
-  }
-
-  //cancela cadastro
+     
+  // Função para cancelar o cadastro do cliente
   cancelarCadastro() {
-    this.clienteForm.reset();
-    this.clienteForm.enable();
-    this.clienteCadastrado = false;
-    this.mensagem = '';
+  this.clienteForm.reset();
+  this.clienteForm.enable();
+  this.clienteCadastrado = false;
+  this.mensagem = '';
   }
 }
